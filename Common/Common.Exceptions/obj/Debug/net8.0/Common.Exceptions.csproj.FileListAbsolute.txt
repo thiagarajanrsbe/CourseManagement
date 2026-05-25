@@ -1,0 +1,11 @@
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\bin\Debug\net8.0\Common.Exceptions.deps.json
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\bin\Debug\net8.0\Common.Exceptions.dll
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\bin\Debug\net8.0\Common.Exceptions.pdb
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.GeneratedMSBuildEditorConfig.editorconfig
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.AssemblyInfoInputs.cache
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.AssemblyInfo.cs
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.csproj.CoreCompileInputs.cache
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.dll
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\refint\Common.Exceptions.dll
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\Common.Exceptions.pdb
+D:\Thiya\CTS_Eval\CourseManagement\Common\Common.Exceptions\obj\Debug\net8.0\ref\Common.Exceptions.dll
