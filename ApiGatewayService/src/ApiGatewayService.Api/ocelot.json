@@ -1,0 +1,84 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{version}/users/auth/{endpoint}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 58474
+        }
+      ],
+      "UpstreamPathTemplate": "/api/users/auth/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Patch" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      },
+      "RouteIsCaseSensitive": false
+    },
+    {
+        "DownstreamPathTemplate": "/api/{version}/users/{endpoint}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 58474
+            }
+        ],
+        "UpstreamPathTemplate": "/api/users/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Patch" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "RateLimitOptions": {
+            "ClientWhitelist": [],
+            "EnableRateLimiting": true,
+            "Period": "1m",
+            "PeriodTimespan": 60,
+            "Limit": 100
+        },
+        "RouteIsCaseSensitive": false
+    },
+    {
+        "DownstreamPathTemplate": "/api/{version}/courses/{endpoint}",
+
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 58472
+            }
+        ],
+        "UpstreamPathTemplate": "/api/courses/{endpoint}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Patch" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "RateLimitOptions": {
+            "ClientWhitelist": [],
+            "EnableRateLimiting": true,
+            "Period": "1m",
+            "PeriodTimespan": 60,
+            "Limit": 100
+        },
+        "RouteIsCaseSensitive": false
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000",
+    "HttpHandlerOptions": {
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    "RateLimitOptions": {
+      "ClientIdHeader": "ClientId",
+      "QuotaExceededMessage": "API calls quota exceeded! Maximum allowed: {0} per {1}.",
+      "RateLimitCounterPrefix": "ocelot"
+    }
+  }
+}
