@@ -1,0 +1,5 @@
+cd CourseManagement/CourseService/src/CourseService.Api
+dotnet run
+
+cd CourseManagement/UserService/src/UserService.Api
+dotnet run
