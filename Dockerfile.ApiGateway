@@ -1,0 +1,31 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy project files
+COPY ["ApiGatewayService/src/ApiGatewayService.Api/ApiGatewayService.Api.csproj", "ApiGatewayService/src/ApiGatewayService.Api/"]
+COPY ["Common/Common.Exceptions/Common.Exceptions.csproj", "Common/Common.Exceptions/"]
+
+# Restore dependencies
+RUN dotnet restore "ApiGatewayService/src/ApiGatewayService.Api/ApiGatewayService.Api.csproj"
+
+# Copy source code
+COPY . .
+
+# Build
+RUN dotnet build "ApiGatewayService/src/ApiGatewayService.Api/ApiGatewayService.Api.csproj" -c Release -o /app/build
+
+# Publish stage
+FROM build AS publish
+RUN dotnet publish "ApiGatewayService/src/ApiGatewayService.Api/ApiGatewayService.Api.csproj" -c Release -o /app/publish
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+ENTRYPOINT ["dotnet", "ApiGatewayService.Api.dll"]

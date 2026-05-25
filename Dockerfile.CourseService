@@ -1,0 +1,34 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy all project files
+COPY ["CourseService/src/CourseService.Api/CourseService.Api.csproj", "CourseService/src/CourseService.Api/"]
+COPY ["CourseService/src/CourseService.Application/CourseService.Application.csproj", "CourseService/src/CourseService.Application/"]
+COPY ["CourseService/src/CourseService.Domain/CourseService.Domain.csproj", "CourseService/src/CourseService.Domain/"]
+COPY ["CourseService/src/CourseService.Infrastructure/CourseService.Infrastructure.csproj", "CourseService/src/CourseService.Infrastructure/"]
+COPY ["Common/Common.Exceptions/Common.Exceptions.csproj", "Common/Common.Exceptions/"]
+
+# Restore dependencies
+RUN dotnet restore "CourseService/src/CourseService.Api/CourseService.Api.csproj"
+
+# Copy source code
+COPY . .
+
+# Build
+RUN dotnet build "CourseService/src/CourseService.Api/CourseService.Api.csproj" -c Release -o /app/build
+
+# Publish stage
+FROM build AS publish
+RUN dotnet publish "CourseService/src/CourseService.Api/CourseService.Api.csproj" -c Release -o /app/publish
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+EXPOSE 5200
+ENV ASPNETCORE_URLS=http://+:5200
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+ENTRYPOINT ["dotnet", "CourseService.Api.dll"]

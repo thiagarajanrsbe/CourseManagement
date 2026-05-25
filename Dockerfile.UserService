@@ -1,0 +1,34 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy all project files
+COPY ["UserService/src/UserService.Api/UserService.Api.csproj", "UserService/src/UserService.Api/"]
+COPY ["UserService/src/UserService.Application/UserService.Application.csproj", "UserService/src/UserService.Application/"]
+COPY ["UserService/src/UserService.Domain/UserService.Domain.csproj", "UserService/src/UserService.Domain/"]
+COPY ["UserService/src/UserService.Infrastructure/UserService.Infrastructure.csproj", "UserService/src/UserService.Infrastructure/"]
+COPY ["Common/Common.Exceptions/Common.Exceptions.csproj", "Common/Common.Exceptions/"]
+
+# Restore dependencies
+RUN dotnet restore "UserService/src/UserService.Api/UserService.Api.csproj"
+
+# Copy source code
+COPY . .
+
+# Build
+RUN dotnet build "UserService/src/UserService.Api/UserService.Api.csproj" -c Release -o /app/build
+
+# Publish stage
+FROM build AS publish
+RUN dotnet publish "UserService/src/UserService.Api/UserService.Api.csproj" -c Release -o /app/publish
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+EXPOSE 5100
+ENV ASPNETCORE_URLS=http://+:5100
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+ENTRYPOINT ["dotnet", "UserService.Api.dll"]

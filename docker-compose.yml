@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # API Gateway Service
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.ApiGateway
+    container_name: course-management-gateway
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Jwt__Secret=your-secret-key-change-in-production-minimum-32-characters-long!!!
+      - Jwt__Issuer=CourseManagementUserService
+      - Jwt__Audience=CourseManagementAPI
+    depends_on:
+      - user-service
+      - course-service
+    networks:
+      - course-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # User Service
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.UserService
+    container_name: course-management-user-service
+    ports:
+      - "5100:5100"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Jwt__Secret=your-secret-key-change-in-production-minimum-32-characters-long!!!
+      - Jwt__Issuer=CourseManagementUserService
+      - Jwt__Audience=CourseManagementAPI
+      - Jwt__ExpirationMinutes=60
+    networks:
+      - course-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Course Service
+  course-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.CourseService
+    container_name: course-management-course-service
+    ports:
+      - "5200:5200"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Jwt__Secret=your-secret-key-change-in-production-minimum-32-characters-long!!!
+      - Jwt__Issuer=CourseManagementUserService
+      - Jwt__Audience=CourseManagementAPI
+      - Services__UserServiceUrl=http://user-service:5100/api/
+    depends_on:
+      - user-service
+    networks:
+      - course-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5200/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  course-management-network:
+    driver: bridge
+
+volumes:
+  user-service-logs:
+  course-service-logs:
+  gateway-logs:
