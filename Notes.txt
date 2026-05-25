@@ -1,5 +1,7 @@
-cd CourseManagement/CourseService/src/CourseService.Api
-dotnet run
+cd CourseManagement/CourseService/src/CourseService.Api>dotnet run
 
-cd CourseManagement/UserService/src/UserService.Api
-dotnet run
+cd CourseManagement/UserService/src/UserService.Api>dotnet run
+
+\CourseManagement\CourseService\tests\CourseService.UnitTests> dotnet test
+
+CourseManagement\UserService\tests\UserService.UnitTests> dotnet test
