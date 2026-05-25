@@ -1,0 +1,11 @@
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\bin\Debug\net8.0\CourseService.Domain.deps.json
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\bin\Debug\net8.0\CourseService.Domain.dll
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\bin\Debug\net8.0\CourseService.Domain.pdb
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.AssemblyInfoInputs.cache
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.AssemblyInfo.cs
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.csproj.CoreCompileInputs.cache
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.dll
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\refint\CourseService.Domain.dll
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\CourseService.Domain.pdb
+D:\Thiya\CTS_Eval\CourseManagement\CourseService\src\CourseService.Domain\obj\Debug\net8.0\ref\CourseService.Domain.dll
